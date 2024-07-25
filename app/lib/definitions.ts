@@ -31,6 +31,15 @@ export type Revenue = {
   revenue: number;
 };
 
+export type WeatherData = {
+  id: string;
+  city: string;
+  temp: number;
+  pressurepsi: number;
+  humidity: number;
+};
+
+
 export type LatestInvoice = {
   id: string;
   name: string;

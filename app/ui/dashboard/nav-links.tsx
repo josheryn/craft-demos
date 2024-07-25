@@ -19,6 +19,11 @@ const links = [
     href: '/dashboard/demos',
     icon: DocumentDuplicateIcon,
   },
+  {
+    name: 'Weather Data',
+    href: '/dashboard/weatherdemo',
+    icon: DocumentDuplicateIcon,
+  },
   { name: 'Customers', href: '/dashboard/customers', icon: UserGroupIcon },
 ];
 

@@ -6,6 +6,7 @@ import {
   InvoicesTable,
   LatestInvoiceRaw,
   Revenue,
+  WeatherData,
 } from './definitions';
 import { formatCurrency } from './utils';
 
@@ -44,6 +45,24 @@ export async function fetchLatestInvoices() {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch the latest invoices.');
+  }
+}
+
+export async function fetchWeatherData() {
+  try {
+    // Artificially delay a response for demo purposes.
+    // Don't do this in production :)
+    console.log('Fetching weather data...');
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+
+    const data = await sql<WeatherData>`SELECT * FROM weatherdata`;
+
+    console.log('Data fetch completed after 3 seconds.');
+
+    return data.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch weather data.');
   }
 }
 

@@ -9,6 +9,70 @@ const users = [
   },
 ];
 
+// some sample data for the weatherData table
+const weatherData = [
+  {
+    city: 'New York',
+    temp: 70,
+    pressurePsi: 1012,
+    humidity: 80,
+  },
+  {
+    city: 'San Francisco',
+    temp: 60,
+    pressurePsi: 1015,
+    humidity: 70,
+  },
+  {
+    city: 'Los Angeles',
+    temp: 80,
+    pressurePsi: 1010,
+    humidity: 75,
+  },
+  {
+    city: 'Chicago',
+    temp: 65,
+    pressurePsi: 1014,
+    humidity: 85,
+  },
+  {
+    city: 'Houston',
+    temp: 90,
+    pressurePsi: 1010,
+    humidity: 90,
+  },
+  {
+    city: 'Miami',
+    temp: 85,
+    pressurePsi: 1010,
+    humidity: 85,
+  },
+  {
+    city: 'Seattle',
+    temp: 55,
+    pressurePsi: 1015,
+    humidity: 80,
+  },
+  {
+    city: 'Boston',
+    temp: 70,
+    pressurePsi: 1012,
+    humidity: 75,
+  },
+  {
+    city: 'Denver',
+    temp: 75,
+    pressurePsi: 1010,
+    humidity: 70,
+  },
+  {
+    city: 'Atlanta',
+    temp: 80,
+    pressurePsi: 1010,
+    humidity: 80,
+  },
+];
+
 const customers = [
   {
     id: 'd6e15727-9fe1-4961-8c5b-ea44a9bd81aa',
@@ -144,4 +208,4 @@ const revenue = [
   { month: 'Dec', revenue: 4800 },
 ];
 
-export { users, customers, invoices, revenue };
+export { users, customers, invoices, revenue, weatherData };

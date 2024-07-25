@@ -38,7 +38,7 @@ export const generateYAxis = (revenue: Revenue[]) => {
 export const generateYAxisWeatherData = (weatherData: WeatherData[]) => {
   // Calculate what labels we need to display on the y-axis
   const yAxisLabels = [];
-  const highestRecord = Math.max(...weatherData.map((city) => weatherData.temp));
+  const highestRecord = Math.max(...weatherData.map((city) => city.temp));
   const topLabel = Math.ceil(highestRecord / 1000) * 1000;
 
   for (let i = topLabel; i >= 0; i -= 1000) {

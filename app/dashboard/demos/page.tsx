@@ -113,7 +113,7 @@ Output – 32-bit integer */
       <button onClick={handleSubmit} style={buttonStyle}>Calculate Max Sum</button>
       {result !== null && <p>Max Possible Sum of Contiguous Balances: {result}</p>}
     <br /><br /><br />
-      <h1>Calculate how many distinct ways you can use the measuring cups to fill the bucket of the size below. You can use one cup or two cup measuring cup as you fill it.</h1>
+      <h1>Calculate how many distinct ways you can use the measuring cups to fill the bucket of the size below. You can use one cup or two cup measuring cup as you fill it</h1>
       <input
         type="text"
         value={secondInput}

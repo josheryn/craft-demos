@@ -77,6 +77,7 @@ export async function fetchWeatherData() {
  */
 export async function getTopKWeatherDataByField(field: string, k: number, order: string) {
   try {
+    
     console.log('Fetching weather data...');
     // Manually escape the field name to prevent SQL injection
     const safeField = `${field.replace(/"/g, '""')}`;

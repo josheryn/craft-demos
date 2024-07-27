@@ -35,18 +35,31 @@ export const generateYAxis = (revenue: Revenue[]) => {
   return { yAxisLabels, topLabel };
 };
 
-export const generateYAxisWeatherData = (weatherData: WeatherData[]) => {
+// export const generateYAxisWeatherData = (weatherData: WeatherData[]) => {
+//   // Calculate what labels we need to display on the y-axis
+//   const yAxisLabels = [];
+//   const highestRecord = Math.max(...weatherData.map((city) => city.temp));
+//   const topLabel = Math.ceil(highestRecord / 1000) * 1000;
+
+//   for (let i = topLabel; i >= 0; i -= 1000) {
+//     yAxisLabels.push(`$${i / 1000}K`);
+//   }
+
+//   return { yAxisLabels, topLabel };
+// };
+
+export function generateYAxisWeatherData(weatherData: Array<{ temp: number } | null>) {
   // Calculate what labels we need to display on the y-axis
   const yAxisLabels = [];
-  const highestRecord = Math.max(...weatherData.map((city) => city.temp));
+  const highestRecord = Math.max(...weatherData.map((city) => city ? city.temp : -Infinity));
   const topLabel = Math.ceil(highestRecord / 1000) * 1000;
 
   for (let i = topLabel; i >= 0; i -= 1000) {
-    yAxisLabels.push(`$${i / 1000}K`);
+    yAxisLabels.push(i);
   }
 
-  return { yAxisLabels, topLabel };
-};
+  return yAxisLabels;
+}
 
 export const generatePagination = (currentPage: number, totalPages: number) => {
   // If the total number of pages is 7 or less,

@@ -1,9 +1,6 @@
-import { generateYAxis, generateYAxisWeatherData } from '@/app/lib/utils';
-import { CalendarIcon } from '@heroicons/react/24/outline';
 import { lusitana } from '@/app/ui/fonts';
 import { ArrowPathIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
-import Image from 'next/image';
 import { WeatherData } from '@/app/lib/definitions';
 import Link from 'next/link';
 
@@ -19,7 +16,6 @@ export default async function WeatherChart({
   weatherData: WeatherData[];
 }) {
   const chartHeight = 350;
-  const { yAxisLabels, topLabel } = generateYAxisWeatherData(weatherData);
 
   if (!weatherData || weatherData.length === 0) {
     return <p className="mt-4 text-gray-400">No data available.</p>;

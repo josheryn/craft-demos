@@ -1,11 +1,8 @@
 "use client";
 
-import { Card } from '@/app/ui/dashboard/cards';
-import RevenueChart from '@/app/ui/dashboard/revenue-chart';
-import LatestInvoices from '@/app/ui/dashboard/latest-invoices';
+import { useEffect, useState } from 'react';
 import WeatherChart from '@/app/ui/dashboard/weather-chart';
-import { lusitana } from '@/app/ui/fonts';
-import { fetchRevenue, fetchLatestInvoices, fetchWeatherData, getTopKWeatherDataByField } from '@/app/lib/data';
+import { getTopKWeatherDataByField } from '@/app/lib/data';
 import { useSearchParams } from 'next/navigation';
 
 export default async function Page() {
@@ -17,10 +14,16 @@ export default async function Page() {
   // Convert limit to a number
   const limitNumber = parseInt(limit, 10);
 
+  console.log('field:', field);
+  console.log('limit:', limit);
+  console.log('order:', order);
+
   // Fetch data
-  const revenue = await fetchRevenue();
-  const latestInvoices = await fetchLatestInvoices();
   const weatherData = await getTopKWeatherDataByField(field, limitNumber, order);
+
+  if (!weatherData) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <main>

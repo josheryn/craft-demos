@@ -5,6 +5,7 @@ import { ArrowPathIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import Image from 'next/image';
 import { WeatherData } from '@/app/lib/definitions';
+import Link from 'next/link';
 
 // This component is representational only.
 // For data visualization UI, check out:
@@ -33,6 +34,28 @@ export default async function WeatherChart({
         {/* NOTE: Uncomment this code in Chapter 7 */}
 
         {<div className="bg-white px-6">
+        {/* Table Header */}
+        <div className="header-row">
+        </div>
+        <div className="flex flex-row items-center justify-between py-4 border-b">
+          <div className="flex items-center">
+            <div className="min-w-0">
+              <p className="truncate text-sm font-semibold md:text-base">
+              <Link href="?field=city&limit=5">City</Link>
+              </p>
+              <p className={`${lusitana.className} truncate text-sm font-medium md:text-base`}>
+              <Link href="?field=temp&limit=5">Temperature</Link>
+              </p>
+            </div>
+          </div>
+          
+          <p className={`${lusitana.className} truncate text-sm font-medium md:text-base`}>
+          <Link href="?field=humidity&limit=5">Humidity</Link>
+          </p>
+          <p className={`${lusitana.className} truncate text-sm font-medium md:text-base`}>
+          <Link href="?field=pressurepsi&limit=5">Pressure (psi)</Link>
+          </p>
+        </div>
           {weatherData.map((wd, i) => {
             return (
               <div
@@ -55,9 +78,14 @@ export default async function WeatherChart({
                   </div>
                 </div>
                 <p
-                  className={`${lusitana.className} truncate text-sm font-medium md:text-base`}
+                  className={`${lusitana.className} truncate text-sm font-medium md:text-base text-right`}
                 >
                   {wd.humidity}
+                </p>
+                <p
+                  className={`${lusitana.className} truncate text-sm font-medium md:text-base`}
+                >
+                  {wd.pressurepsi}
                 </p>
               </div>
             );

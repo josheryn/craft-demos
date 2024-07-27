@@ -21,7 +21,7 @@ const links = [
   },
   {
     name: 'Weather Data',
-    href: '/dashboard/weatherdemo',
+    href: '/dashboard/weatherdemo?field=city&limit=5',
     icon: DocumentDuplicateIcon,
   },
   { name: 'Customers', href: '/dashboard/customers', icon: UserGroupIcon },

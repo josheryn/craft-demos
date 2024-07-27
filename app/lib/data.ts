@@ -1,4 +1,4 @@
-import { sql } from '@vercel/postgres';
+import { sql, db } from '@vercel/postgres';
 import {
   CustomerField,
   CustomersTableType,
@@ -59,6 +59,87 @@ export async function fetchWeatherData() {
 
     console.log('Data fetch completed after 3 seconds.');
 
+    return data.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch weather data.');
+  }
+}
+
+/**
+ * function getTopKWeatherDataByField
+ * returns the top K weather data from weatherdata table by the given field 
+ * 
+ * @param field - the field to sort by
+ * @param k - the number of records to return
+ * @param order - the order to sort by
+ * @returns - the top K weather data records sorted by the given field 
+ */
+export async function getTopKWeatherDataByField(field: string, k: number, order: string) {
+  try {
+    console.log('Fetching weather data...');
+    // Manually escape the field name to prevent SQL injection
+    const safeField = `${field.replace(/"/g, '""')}`;
+    console.log('Safe field:', safeField);
+    console.log('Order:', order);
+    
+    // Define the data variable outside the if block
+    let data = await sql<WeatherData>`SELECT * FROM weatherdata ORDER BY temp LIMIT ${k}`;
+
+    // Use an if block to handle different possible safeField variables
+    // if (safeField == "temp") {
+    //   console.log('Temp');
+    //   data = await sql<WeatherData>`SELECT * FROM weatherdata ORDER BY temp LIMIT ${k}`;;
+    // } else if (safeField == 'humidity') {
+    //   data = await sql<WeatherData>`SELECT * FROM weatherdata ORDER BY humidity LIMIT ${k}`;
+    // } else if (safeField == 'pressurepsi') {
+    //   data = await sql<WeatherData>`SELECT * FROM weatherdata ORDER BY pressurepsi LIMIT ${k}`;
+    // } else if (safeField == 'city') {
+    //   data = await sql<WeatherData>`SELECT * FROM weatherdata ORDER BY city LIMIT ${k}`;
+    // } else {
+    //   throw new Error('Invalid field specified');
+    // }
+    // Use a switch statement to handle different possible safeField variables
+   
+    if (order === 'ASC') {
+      switch (safeField) {
+        case 'temp':
+          console.log('Temp');
+          data = await sql<WeatherData>`SELECT * FROM weatherdata ORDER BY temp LIMIT ${k}`;
+          break;
+        case 'humidity':
+          data = await sql<WeatherData>`SELECT * FROM weatherdata ORDER BY humidity LIMIT ${k}`;
+          break;
+        case 'pressurepsi':
+          data = await sql<WeatherData>`SELECT * FROM weatherdata ORDER BY pressurepsi LIMIT ${k}`;
+          break;
+        case 'city':
+          data = await sql<WeatherData>`SELECT * FROM weatherdata ORDER BY city LIMIT ${k}`;
+          break;
+        default:
+          throw new Error('Invalid field specified');
+      }
+    } else {
+      switch (safeField) {
+        case 'temp':
+          console.log('Temp');
+          data = await sql<WeatherData>`SELECT * FROM weatherdata ORDER BY temp DESC LIMIT ${k}`;
+          break;
+        case 'humidity':
+          data = await sql<WeatherData>`SELECT * FROM weatherdata ORDER BY humidity DESC LIMIT ${k}`;
+          break;
+        case 'pressurepsi':
+          data = await sql<WeatherData>`SELECT * FROM weatherdata ORDER BY pressurepsi DESC LIMIT ${k}`;
+          break;
+        case 'city':
+          data = await sql<WeatherData>`SELECT * FROM weatherdata ORDER BY city DESC LIMIT ${k}`;
+          break;
+        default:
+          throw new Error('Invalid field specified');
+      }
+    }
+
+    console.log(data.rows);
     return data.rows;
   } catch (error) {
     console.error('Database Error:', error);
